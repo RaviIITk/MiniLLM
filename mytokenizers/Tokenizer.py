@@ -10,7 +10,8 @@ class SimpleTokenizer:
         words = re.split(r'([,.:;?_!"()\']|--|\s)', text) #split the text into sentances\
         words = [item.strip() for item in words if item.strip()] # remove the spaces 
         words = [
-            item for item in words                        # if any word is not present in vocab then putting "<|unk|>" 
+            item if item in self.vocab 
+            else "<|unk|>" for item in words                        # if any word is not present in vocab then putting "<|unk|>" 
         ]  
 
         return [self.vocab[s] for s in words]
